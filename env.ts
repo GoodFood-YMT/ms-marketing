@@ -21,4 +21,9 @@ export default Env.rules({
   APP_NAME: Env.schema.string(),
   DRIVE_DISK: Env.schema.enum(['local'] as const),
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
+  RABBITMQ_HOSTNAME: Env.schema.string(),
+  RABBITMQ_USER: Env.schema.string(),
+  RABBITMQ_PASSWORD: Env.schema.string(),
+  RABBITMQ_PORT: Env.schema.number(),
+  RABIITMQ_PROTOCOL: Env.schema.string(),
 })
