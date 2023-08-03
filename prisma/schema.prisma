@@ -10,31 +10,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model order {
+model Orders {
   id String @id @map("_id")
-  status String
   created_at DateTime
-  updated_at DateTime?
+  totalPrice Float
+  restaurant_id String
+  user_id String
 }
 
-model delivery {
+model Deliveries {
   id String @id @map("_id")
-  status String
-  address_id String
-  deliverer_id String
   order_id String
   created_at DateTime
   updated_at DateTime?
+  restaurant_id String
 }
 
-model User {
+model Users {
   id String @id @map("_id")
-  email String
-  firstName String
-  lastname String
-  password String
-  restaurantId String?
-  role_id String
   created_at DateTime
-  updated_at DateTime?
 }
