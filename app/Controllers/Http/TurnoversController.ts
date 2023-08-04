@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { prisma } from '@ioc:Adonis/Addons/Prisma'
 
-export default class MarketingsController {
+export default class TurnoversController {
   public async index({ request, response }: HttpContextContract) {
     const idRestaurant = request.input('RestaurantID')
     const role = request.input('Role')
