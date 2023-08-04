@@ -3,8 +3,8 @@ import { prisma } from '@ioc:Adonis/Addons/Prisma'
 
 export default class DeliveriesController {
   public async index({ request, response }: HttpContextContract) {
-    const role = request.input('Role')
-    const idRestaurant = request.input('RestaurantID')
+    const role = request.header('Role')
+    const idRestaurant = request.header('RestaurantID')
 
     const theDate: Date = new Date()
     theDate.setDate(theDate.getDate() - 30)

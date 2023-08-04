@@ -3,8 +3,8 @@ import { prisma } from '@ioc:Adonis/Addons/Prisma'
 
 export default class TurnoversController {
   public async index({ request, response }: HttpContextContract) {
-    const idRestaurant = request.input('RestaurantID')
-    const role = request.input('Role')
+    const idRestaurant = request.header('RestaurantID')
+    const role = request.header('Role')
 
     const theDate: Date = new Date()
     theDate.setDate(theDate.getDate() - 30)
