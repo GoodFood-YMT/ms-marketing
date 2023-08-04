@@ -67,7 +67,6 @@ async function listenDeliveryDelivered() {
           id: payload.delivery_id,
           order_id: payload.order_id,
           created_at: new Date(payload.created_at),
-          restaurant_id: '',
         },
       })
       console.log(`a delivery with id=${order.id} has been delivered`)

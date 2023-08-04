@@ -22,8 +22,6 @@ model Deliveries {
   id String @id @map("_id")
   order_id String
   created_at DateTime
-  updated_at DateTime?
-  restaurant_id String
 }
 
 model Users {
