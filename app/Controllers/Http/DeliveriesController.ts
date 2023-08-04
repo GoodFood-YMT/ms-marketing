@@ -2,10 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { prisma } from '@ioc:Adonis/Addons/Prisma'
 
 export default class DeliveriesController {
-  public async index({ request, response }: HttpContextContract) {
-    // const idRestaurant = request.input('RestaurantID')
-    // const role = request.input('Role')
-
+  public async index({ response }: HttpContextContract) {
     const theDate: Date = new Date()
     theDate.setDate(theDate.getDate() - 30)
 
