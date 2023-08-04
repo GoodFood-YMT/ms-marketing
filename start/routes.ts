@@ -1,4 +1,6 @@
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/marketing/order', 'OrdersController.index')
-Route.get('/marketing/delivery', 'DeliveriesController.index')
+Route.get('/marketing/Orders', 'OrdersController.index')
+Route.get('/marketing/Deliveries', 'DeliveriesController.index')
+Route.get('/marketing/Users', 'UsersController.index')
+Route.get('/marketing/Turnovers', 'MarketingsController.index')

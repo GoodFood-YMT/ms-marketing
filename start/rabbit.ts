@@ -18,8 +18,6 @@ const DeliveryCreationSchema = schema.create({
   delivery_id: schema.string(),
   order_id: schema.string(),
   created_at: schema.string(),
-  updated_at: schema.string(),
-  restaurant_id: schema.string(),
 })
 
 const UserCreationSchema = schema.create({
