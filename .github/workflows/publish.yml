@@ -13,7 +13,7 @@ jobs:
 
       - name: Install Prisma and generate client
         run: |
-          npm install prisma @prisma/client --save
+          npm install prisma:5.0.0 @prisma/client:5.0.0 --save
           npx prisma generate
 
       - name: Login to Docker Hub
