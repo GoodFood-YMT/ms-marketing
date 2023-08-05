@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ms-marketing-db-config
+  labels:
+    app: ms-marketing-db
+data:
+  MONGO_INITDB_ROOT_USERNAME: ms-marketing-user
+  MONGO_INITDB_ROOT_PASSWORD: mongo123

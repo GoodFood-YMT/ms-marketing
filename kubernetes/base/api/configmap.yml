@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ms-marketing-config
+  labels:
+    app: ms-marketing
+data:
+  PORT: '3333'
+  HOST: '0.0.0.0'
+  NODE_ENV: 'production'
+  DRIVE_DISK: 'local'
+  RABBITMQ_HOSTNAME: 'event-bus'
+  RABBITMQ_PORT: '5672'
+  RABIITMQ_PROTOCOL: 'ampq://'
+  DATABASE_URL: 'mongodb://ms-marketing-user:mongo123@localhost:51155/?authMechanism=DEFAULT'

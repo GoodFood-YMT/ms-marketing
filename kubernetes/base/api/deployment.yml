@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-marketing
+  labels:
+    app: ms-marketing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-marketing
+  template:
+    metadata:
+      labels:
+        app: ms-marketing
+    spec:
+      tolerations:
+        - key: 'node.kubernetes.io/unschedulable'
+          operator: 'Exists'
+          effect: 'NoSchedule'
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: ms-marketing-config
+            - secretRef:
+                name: ms-marketing-secret
+          image: yasinkara/ms-marketing:latest
+          imagePullPolicy: Always
+          name: ms-marketing
+          ports:
+            - containerPort: 3333
+          resources: {}
+      restartPolicy: Always

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ms-marketing-db-persistent-volume
+  labels:
+    type: local
+    app: ms-marketing-db
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: '/run/desktop/mnt/host/c/users/karak/Documents/kubernetes/volumes/ms-marketing/db'
