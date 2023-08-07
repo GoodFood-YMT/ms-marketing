@@ -17,7 +17,7 @@ export default class UsersController {
     return response.status(200).json(
       users.map((el) => ({
         createdAt: el.createdAt,
-        count: el._count,
+        count: el._count._all,
       }))
     )
   }
