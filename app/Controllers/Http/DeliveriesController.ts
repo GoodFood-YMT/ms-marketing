@@ -33,6 +33,11 @@ export default class DeliveriesController {
       orderBy: { createdAt: 'asc' },
     })
 
-    return response.status(200).json(deliveries)
+    return response.status(200).json(
+      deliveries.map((el) => ({
+        createdAt: el.createdAt,
+        count: el._count._all,
+      }))
+    )
   }
 }

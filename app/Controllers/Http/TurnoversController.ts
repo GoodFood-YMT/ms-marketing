@@ -21,6 +21,12 @@ export default class TurnoversController {
       orderBy: { createdAt: 'asc' },
     })
 
-    return response.status(200).json(turnover)
+    return response.status(200).json(
+      turnover.map((el) => ({
+        createdAt: el.createdAt,
+        restaurantId: el.restaurantId,
+        sum: el._sum.totalPrice,
+      }))
+    )
   }
 }
