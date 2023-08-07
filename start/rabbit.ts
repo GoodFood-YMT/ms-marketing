@@ -7,22 +7,22 @@ import { validator, schema } from '@ioc:Adonis/Core/Validator'
 import { prisma } from '@ioc:Adonis/Addons/Prisma'
 
 const OrderCreationSchema = schema.create({
-  order_id: schema.string(),
+  orderId: schema.string(),
   totalPrice: schema.string(),
-  created_at: schema.string(),
-  restaurant_id: schema.string(),
-  user_id: schema.string(),
+  createdAt: schema.string(),
+  restaurantId: schema.string(),
+  userId: schema.string(),
 })
 
 const DeliveryCreationSchema = schema.create({
-  delivery_id: schema.string(),
-  order_id: schema.string(),
-  created_at: schema.string(),
+  deliveryId: schema.string(),
+  orderId: schema.string(),
+  createdAt: schema.string(),
 })
 
 const UserCreationSchema = schema.create({
-  user_id: schema.string(),
-  created_at: schema.string(),
+  userId: schema.string(),
+  createdAt: schema.string(),
 })
 
 async function listenOrderCreated() {
@@ -36,11 +36,11 @@ async function listenOrderCreated() {
       })
       const order = await prisma.orders.create({
         data: {
-          id: payload.order_id,
-          created_at: new Date(payload.created_at),
+          id: payload.orderId,
+          createdAt: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00'),
           totalPrice: parseFloat(payload.totalPrice),
-          restaurant_id: payload.restaurant_id,
-          user_id: payload.user_id,
+          restaurantId: payload.restaurantId,
+          userId: payload.userId,
         },
       })
       console.log(`a new order with id=${order.id} has been created`)
@@ -62,9 +62,9 @@ async function listenDeliveryDelivered() {
       })
       const order = await prisma.deliveries.create({
         data: {
-          id: payload.delivery_id,
-          order_id: payload.order_id,
-          created_at: new Date(payload.created_at),
+          id: payload.deliveryId,
+          orderId: payload.orderId,
+          createdAt: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00'),
         },
       })
       console.log(`a delivery with id=${order.id} has been delivered`)
@@ -85,8 +85,8 @@ async function listenUserCreated() {
       })
       const order = await prisma.users.create({
         data: {
-          id: payload.user_id,
-          created_at: new Date(payload.created_at),
+          id: payload.userId,
+          createdAt: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00'),
         },
       })
       console.log(`a new user with id=${order.id} has been created`)

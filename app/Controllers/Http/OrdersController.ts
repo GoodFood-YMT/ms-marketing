@@ -10,13 +10,13 @@ export default class OrdersController {
     theDate.setDate(theDate.getDate() - 30)
 
     const orders = await prisma.orders.groupBy({
-      by: ['created_at'],
+      by: ['createdAt'],
       _count: { _all: true },
       where: {
-        created_at: { gte: theDate },
-        ...(role !== 'manager' ? { restaurant_id: idRestaurant } : {}),
+        createdAt: { gte: theDate },
+        ...(role !== 'manager' ? { restaurantId: idRestaurant } : {}),
       },
-      orderBy: { created_at: 'asc' },
+      orderBy: { createdAt: 'asc' },
     })
     return response.status(200).json(orders)
   }

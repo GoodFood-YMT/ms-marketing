@@ -8,31 +8,42 @@ export default class KpisController {
     if (!(theDate instanceof Date) || !isFinite(+theDate)) {
       throw new Exception('Invalid Date')
     }
-    const orders = await prisma.orders.count({
+
+    const idRestaurant = request.header('RestaurantID')
+    const role = request.header('Role')
+
+    const orders = await prisma.orders.findMany({
       where: {
-        created_at: { equals: theDate },
+        createdAt: { equals: theDate },
+        ...(role !== 'manager' ? { restaurantId: { equals: idRestaurant } } : {}),
       },
+      select: { id: true },
     })
+
     const deliveries = await prisma.deliveries.count({
       where: {
-        created_at: { equals: theDate },
+        createdAt: { equals: theDate },
+        ...(role !== 'manager' ? { orderId: { in: orders.map((el) => el.id) } } : {}),
       },
     })
+
     const users = await prisma.users.count({
       where: {
-        created_at: { equals: theDate },
+        createdAt: { equals: theDate },
       },
     })
+
     const revenue = await prisma.orders.aggregate({
       where: {
-        created_at: { equals: theDate },
+        createdAt: { equals: theDate },
+        ...(role !== 'manager' ? { restaurantId: { equals: idRestaurant } } : {}),
       },
       _sum: {
         totalPrice: true,
       },
     })
     return response.status(200).json({
-      orders: orders,
+      orders: orders.length,
       deliveries: deliveries,
       users: users,
       revenue: revenue._sum.totalPrice,

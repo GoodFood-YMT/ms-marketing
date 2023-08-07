@@ -7,10 +7,10 @@ export default class UsersController {
     theDate.setDate(theDate.getDate() - 30)
 
     const users = await prisma.users.groupBy({
-      by: ['created_at'],
+      by: ['createdAt'],
       _count: { _all: true },
       where: {
-        created_at: { gte: theDate },
+        createdAt: { gte: theDate },
       },
     })
 
