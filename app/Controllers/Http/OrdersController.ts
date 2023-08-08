@@ -9,6 +9,9 @@ export default class OrdersController {
     const theDate: Date = new Date()
     theDate.setDate(theDate.getDate() - 30)
 
+    const page = Number(request.input('page') ?? 1)
+    const pageSize = Number(request.input('pageSize') ?? 10)
+
     const orders = await prisma.orders.groupBy({
       by: ['createdAt'],
       _count: { _all: true },
@@ -17,7 +20,10 @@ export default class OrdersController {
         ...(role !== 'manager' ? { restaurantId: idRestaurant } : {}),
       },
       orderBy: { createdAt: 'asc' },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
     })
+
     return response.status(200).json(
       orders.map((el) => ({
         createdAt: el.createdAt,

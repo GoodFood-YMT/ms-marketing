@@ -33,7 +33,7 @@ export default class KpisController {
       },
     })
 
-    const revenue = await prisma.orders.aggregate({
+    const revenu = await prisma.orders.aggregate({
       where: {
         createdAt: { equals: theDate },
         ...(role !== 'manager' ? { restaurantId: { equals: idRestaurant } } : {}),
@@ -46,7 +46,7 @@ export default class KpisController {
       orders: orders.length,
       deliveries: deliveries,
       users: users,
-      revenue: revenue._sum.totalPrice,
+      revenue: revenu._sum.totalPrice,
     })
   }
 }

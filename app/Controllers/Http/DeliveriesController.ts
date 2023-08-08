@@ -9,6 +9,9 @@ export default class DeliveriesController {
     const theDate: Date = new Date()
     theDate.setDate(theDate.getDate() - 30)
 
+    const page = Number(request.input('page') ?? 1)
+    const pageSize = Number(request.input('pageSize') ?? 10)
+
     let restaurantCondition = {}
     if (role !== 'manager') {
       const orders = await prisma.orders.findMany({
@@ -31,6 +34,8 @@ export default class DeliveriesController {
         ...restaurantCondition,
       },
       orderBy: { createdAt: 'asc' },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
     })
 
     return response.status(200).json(
