@@ -12,19 +12,19 @@ datasource db {
 
 model Orders {
   id String @id @map("_id")
-  created_at DateTime
+  createdAt DateTime
   totalPrice Float
-  restaurant_id String
-  user_id String
+  restaurantId String
+  userId String
 }
 
 model Deliveries {
   id String @id @map("_id")
-  order_id String
-  created_at DateTime
+  orderId String
+  createdAt DateTime
 }
 
 model Users {
   id String @id @map("_id")
-  created_at DateTime
+  createdAt DateTime
 }

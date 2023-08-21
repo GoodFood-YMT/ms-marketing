@@ -9,18 +9,29 @@ export default class TurnoversController {
     const theDate: Date = new Date()
     theDate.setDate(theDate.getDate() - 30)
 
+    const page = Number(request.input('page') ?? 1)
+    const pageSize = Number(request.input('pageSize') ?? 10)
+
     const turnover = await prisma.orders.groupBy({
-      by: ['created_at', 'restaurant_id'],
+      by: ['createdAt', 'restaurantId'],
       where: {
-        created_at: { gte: theDate },
-        ...(role !== 'manager' ? { restaurant_id: idRestaurant } : {}),
+        createdAt: { gte: theDate },
+        ...(role !== 'manager' ? { restaurantId: idRestaurant } : {}),
       },
       _sum: {
         totalPrice: true,
       },
-      orderBy: { created_at: 'asc' },
+      orderBy: { createdAt: 'asc' },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
     })
 
-    return response.status(200).json(turnover)
+    return response.status(200).json(
+      turnover.map((el) => ({
+        createdAt: el.createdAt,
+        restaurantId: el.restaurantId,
+        sum: el._sum.totalPrice,
+      }))
+    )
   }
 }

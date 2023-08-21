@@ -9,30 +9,40 @@ export default class DeliveriesController {
     const theDate: Date = new Date()
     theDate.setDate(theDate.getDate() - 30)
 
+    const page = Number(request.input('page') ?? 1)
+    const pageSize = Number(request.input('pageSize') ?? 10)
+
     let restaurantCondition = {}
     if (role !== 'manager') {
       const orders = await prisma.orders.findMany({
         where: {
-          restaurant_id: { equals: idRestaurant },
+          restaurantId: { equals: idRestaurant },
         },
         select: {
           id: true,
         },
       })
       let orderId = orders.map((el) => el.id)
-      restaurantCondition = { order_id: { in: orderId } }
+      restaurantCondition = { orderId: { in: orderId } }
     }
 
     const deliveries = await prisma.deliveries.groupBy({
-      by: ['created_at'],
+      by: ['createdAt'],
       _count: { _all: true },
       where: {
-        created_at: { gte: theDate },
+        createdAt: { gte: theDate },
         ...restaurantCondition,
       },
-      orderBy: { created_at: 'asc' },
+      orderBy: { createdAt: 'asc' },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
     })
 
-    return response.status(200).json(deliveries)
+    return response.status(200).json(
+      deliveries.map((el) => ({
+        createdAt: el.createdAt,
+        count: el._count._all,
+      }))
+    )
   }
 }
