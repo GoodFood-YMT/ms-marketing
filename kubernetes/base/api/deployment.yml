@@ -29,6 +29,6 @@ spec:
           name: ms-marketing
           ports:
             - containerPort: 3333
-          command: ['npx', 'prisma', 'generate']
+          command: ['prisma', 'generate', '--schema=./prisma']
           resources: {}
       restartPolicy: Always
