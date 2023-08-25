@@ -8,7 +8,7 @@ USER node
 RUN mkdir tmp
 
 FROM base AS dependencies
-COPY --chown=node:node ./package.json ./
+COPY --chown=node:node ./package*.json ./
 COPY --chown=node:node ./prisma ./prisma
 RUN npm ci
 RUN npx prisma generate
@@ -21,8 +21,7 @@ FROM base AS production
 ENV NODE_ENV=production
 ENV PORT=$PORT
 ENV HOST=0.0.0.0
-COPY --chown=node:node ./package.json ./
-COPY --chown=node:node ./prisma ./prisma
+COPY --chown=node:node ./package*.json ./
 RUN npm ci --production
 RUN npx prisma generate
 COPY --chown=node:node --from=build /home/node/app/build .
