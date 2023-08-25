@@ -12,4 +12,4 @@ data:
   RABBITMQ_HOSTNAME: 'event-bus'
   RABBITMQ_PORT: '5672'
   RABIITMQ_PROTOCOL: 'ampq://'
-  DATABASE_URL: 'mongodb://ms-marketing-user:mongo123@ms-marketing-db:27017/?authMechanism=DEFAULT'
+  DATABASE_URL: 'mongodb://ms-marketing-user:mongo123@ms-marketing-db:27017/ms-marketing'
