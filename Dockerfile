@@ -7,7 +7,7 @@ WORKDIR /home/node/app
 USER node
 RUN mkdir tmp
 
-COPY --chown=node:node .prisma /home/node/.prisma
+COPY --chown=node:node ./prisma /home/node/prisma
 
 FROM base AS dependencies
 COPY --chown=node:node ./package*.json ./
