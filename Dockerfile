@@ -22,6 +22,7 @@ ENV NODE_ENV=production
 ENV PORT=$PORT
 ENV HOST=0.0.0.0
 COPY --chown=node:node ./package*.json ./
+COPY --chown=node:node ./prisma ./prisma
 RUN npm ci --production
 RUN npx prisma generate
 COPY --chown=node:node --from=build /home/node/app/build .
