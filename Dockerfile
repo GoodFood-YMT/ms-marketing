@@ -7,12 +7,13 @@ WORKDIR /home/node/app
 USER node
 RUN mkdir tmp
 
+COPY --chown=node:node .prisma /home/node/.prisma
+
 FROM base AS dependencies
 COPY --chown=node:node ./package*.json ./
 RUN npm ci
 RUN npx prisma generate
 COPY --chown=node:node . .
-COPY --chown=node:node ./prisma ./
 
 FROM dependencies AS build
 RUN node ace build --production
@@ -23,9 +24,6 @@ ENV PORT=$PORT
 ENV HOST=0.0.0.0
 COPY --chown=node:node ./package*.json ./
 RUN npm ci --production
-
-RUN npx prisma generate
-
 COPY --chown=node:node --from=build /home/node/app/build .
 EXPOSE $PORT
 CMD [ "dumb-init", "node", "server.js" ]
