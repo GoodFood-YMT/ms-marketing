@@ -22,7 +22,9 @@ ENV PORT=$PORT
 ENV HOST=0.0.0.0
 COPY --chown=node:node ./package*.json ./
 RUN npm ci --production
+
 RUN npx prisma generate
+
 COPY --chown=node:node --from=build /home/node/app/build .
 EXPOSE $PORT
 CMD [ "dumb-init", "node", "server.js" ]
