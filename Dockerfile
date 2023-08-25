@@ -11,6 +11,7 @@ FROM base AS dependencies
 COPY --chown=node:node ./package*.json ./
 RUN npm ci
 RUN npx prisma generate
+RUN --chown=node:node ./prisma
 COPY --chown=node:node . .
 
 FROM dependencies AS build
