@@ -37,10 +37,10 @@ async function listenOrderCreated() {
       const order = await prisma.orders.create({
         data: {
           id: payload.orderId,
-          created_at: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00').toLocaleString(),
+          createdAt: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00'),
           totalPrice: parseFloat(payload.totalPrice),
-          restaurant_id: payload.restaurantId,
-          user_id: payload.userId,
+          restaurantId: payload.restaurantId,
+          userId: payload.userId,
         },
       })
       console.log(`a new order with id=${order.id} has been created`)
@@ -63,8 +63,8 @@ async function listenDeliveryDelivered() {
       const order = await prisma.deliveries.create({
         data: {
           id: payload.deliveryId,
-          order_id: payload.orderId,
-          created_at: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00'),
+          orderId: payload.orderId,
+          createdAt: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00'),
         },
       })
       console.log(`a delivery with id=${order.id} has been delivered`)
@@ -86,7 +86,7 @@ async function listenUserCreated() {
       const order = await prisma.users.create({
         data: {
           id: payload.userId,
-          created_at: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00'),
+          createdAt: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00'),
         },
       })
       console.log(`a new user with id=${order.id} has been created`)
