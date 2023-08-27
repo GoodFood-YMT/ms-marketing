@@ -11,5 +11,5 @@ data:
   DRIVE_DISK: 'local'
   RABBITMQ_HOSTNAME: 'event-bus'
   RABBITMQ_PORT: '5672'
-  RABIITMQ_PROTOCOL: 'ampq://'
+  RABIITMQ_PROTOCOL: 'amqp://'
   DATABASE_URL: 'mongodb://ms-marketing-user:mongo123@ms-marketing-db:27017/ms-marketing'

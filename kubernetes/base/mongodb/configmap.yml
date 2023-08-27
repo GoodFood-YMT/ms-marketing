@@ -5,5 +5,6 @@ metadata:
   labels:
     app: ms-marketing-db
 data:
+  MONGO_INITDB_DATABASE: 'ms-marketing'
   MONGO_INITDB_ROOT_USERNAME: ms-marketing-user
   MONGO_INITDB_ROOT_PASSWORD: mongo123

@@ -37,7 +37,7 @@ async function listenOrderCreated() {
       const order = await prisma.orders.create({
         data: {
           id: payload.orderId,
-          createdAt: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00'),
+          createdAt: new Date(payload.createdAt),
           totalPrice: parseFloat(payload.totalPrice),
           restaurantId: payload.restaurantId,
           userId: payload.userId,
@@ -64,7 +64,7 @@ async function listenDeliveryDelivered() {
         data: {
           id: payload.deliveryId,
           orderId: payload.orderId,
-          createdAt: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00'),
+          createdAt: new Date(payload.createdAt),
         },
       })
       console.log(`a delivery with id=${order.id} has been delivered`)
@@ -83,10 +83,11 @@ async function listenUserCreated() {
         schema: UserCreationSchema,
         data: JSON.parse(message.content),
       })
+      console.log(payload.createdAt)
       const order = await prisma.users.create({
         data: {
           id: payload.userId,
-          createdAt: new Date(payload.createdAt.split(' ')[0] + ' 00:00:00'),
+          createdAt: new Date(payload.createdAt),
         },
       })
       console.log(`a new user with id=${order.id} has been created`)
