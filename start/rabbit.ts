@@ -37,7 +37,7 @@ async function listenOrderCreated() {
       const order = await prisma.orders.create({
         data: {
           id: payload.orderId,
-          createdAt: new Date(payload.createdAt),
+          createdAt: formatDate(new Date(payload.createdAt)),
           totalPrice: payload.totalPrice,
           restaurantId: payload.restaurantId,
           userId: payload.userId,
@@ -64,7 +64,7 @@ async function listenDeliveryDelivered() {
         data: {
           id: payload.deliveryId,
           orderId: payload.orderId,
-          createdAt: new Date(payload.createdAt),
+          createdAt: formatDate(new Date(payload.createdAt)),
         },
       })
       console.log(`a delivery with id=${order.id} has been delivered`)
@@ -87,7 +87,7 @@ async function listenUserCreated() {
       const order = await prisma.users.create({
         data: {
           id: payload.userId,
-          createdAt: new Date(payload.createdAt),
+          createdAt: formatDate(new Date(payload.createdAt)),
         },
       })
       console.log(`a new user with id=${order.id} has been created`)
@@ -96,6 +96,34 @@ async function listenUserCreated() {
     }
     message.ack()
   })
+}
+
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0')
+}
+
+export function formatDate(date) {
+  return [date.getFullYear(), padTo2Digits(date.getMonth() + 1), padTo2Digits(date.getDate())].join(
+    '-'
+  )
+}
+
+export function getDates(startDate: Date, stopDate: Date) {
+  var dateArray: string[] = []
+  var currentDate = startDate
+  while (currentDate <= stopDate) {
+    dateArray.push(formatDate(currentDate))
+    const tempDate = new Date(currentDate)
+    tempDate.setDate(tempDate.getDate() + 1)
+    currentDate = tempDate
+  }
+  return dateArray
+}
+
+export function removeDays(date: Date, nb: number): Date {
+  const tempDate = new Date(date)
+  tempDate.setDate(tempDate.getDate() - nb)
+  return tempDate
 }
 
 listenOrderCreated()

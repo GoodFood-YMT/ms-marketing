@@ -12,7 +12,7 @@ datasource db {
 
 model Orders {
   id String @unique
-  createdAt DateTime
+  createdAt String
   totalPrice Float
   restaurantId String
   userId String
@@ -21,10 +21,10 @@ model Orders {
 model Deliveries {
   id String @unique
   orderId String
-  createdAt DateTime
+  createdAt String
 }
 
 model Users {
   id String @unique
-  createdAt DateTime
+  createdAt String
 }
