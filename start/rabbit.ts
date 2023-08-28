@@ -38,7 +38,7 @@ async function listenOrderCreated() {
         data: {
           id: payload.orderId,
           createdAt: new Date(payload.createdAt),
-          totalPrice: parseFloat(payload.totalPrice),
+          totalPrice: payload.totalPrice,
           restaurantId: payload.restaurantId,
           userId: payload.userId,
         },
