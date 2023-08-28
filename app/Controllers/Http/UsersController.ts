@@ -20,11 +20,11 @@ export default class UsersController {
       take: pageSize,
     })
 
-    return response.status(200).json(
-      users.map((el) => ({
+    return response.status(200).json({
+      data: users.map((el) => ({
         createdAt: el.createdAt,
         count: el._count._all,
-      }))
-    )
+      })),
+    })
   }
 }

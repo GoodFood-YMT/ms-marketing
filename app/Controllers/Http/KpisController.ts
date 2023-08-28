@@ -1,12 +1,11 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { prisma } from '@ioc:Adonis/Addons/Prisma'
-import { Exception } from '@adonisjs/core/build/standalone'
 
 export default class KpisController {
   public async index({ request, response }: HttpContextContract) {
-    const theDate = new Date(request.input('date'))
+    let theDate = new Date(request.input('date'))
     if (!(theDate instanceof Date) || !isFinite(+theDate)) {
-      throw new Exception('Invalid Date')
+      theDate = new Date()
     }
 
     const idRestaurant = request.header('RestaurantID')

@@ -24,11 +24,11 @@ export default class OrdersController {
       take: pageSize,
     })
 
-    return response.status(200).json(
-      orders.map((el) => ({
+    return response.status(200).json({
+      data: orders.map((el) => ({
         createdAt: el.createdAt,
         count: el._count._all,
-      }))
-    )
+      })),
+    })
   }
 }

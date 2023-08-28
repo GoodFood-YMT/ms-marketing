@@ -38,11 +38,11 @@ export default class DeliveriesController {
       take: pageSize,
     })
 
-    return response.status(200).json(
-      deliveries.map((el) => ({
+    return response.status(200).json({
+      data: deliveries.map((el) => ({
         createdAt: el.createdAt,
         count: el._count._all,
-      }))
-    )
+      })),
+    })
   }
 }

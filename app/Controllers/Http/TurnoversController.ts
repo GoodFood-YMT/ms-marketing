@@ -26,12 +26,12 @@ export default class TurnoversController {
       take: pageSize,
     })
 
-    return response.status(200).json(
-      turnover.map((el) => ({
+    return response.status(200).json({
+      data: turnover.map((el) => ({
         createdAt: el.createdAt,
         restaurantId: el.restaurantId,
         sum: el._sum.totalPrice,
-      }))
-    )
+      })),
+    })
   }
 }
