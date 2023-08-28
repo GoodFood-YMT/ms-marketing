@@ -8,7 +8,7 @@ import { prisma } from '@ioc:Adonis/Addons/Prisma'
 
 const OrderCreationSchema = schema.create({
   orderId: schema.string(),
-  totalPrice: schema.string(),
+  totalPrice: schema.number(),
   createdAt: schema.string(),
   restaurantId: schema.string(),
   userId: schema.string(),
