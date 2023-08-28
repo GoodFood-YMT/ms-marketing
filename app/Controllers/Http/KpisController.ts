@@ -45,7 +45,7 @@ export default class KpisController {
       orders: orders.length,
       deliveries: deliveries,
       users: users,
-      revenue: revenu._sum.totalPrice,
+      revenue: revenu._sum.totalPrice ?? 0,
     })
   }
 }
