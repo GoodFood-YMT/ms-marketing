@@ -1,11 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./mongodb/configmap.yml
-  - ./mongodb/deployment.yml
-  - ./mongodb/persistent-volume.yml
-  - ./mongodb/service.yml
-  - ./mongodb/volume-claim.yml
+  - ./postgresql/configmap.yml
+  - ./postgresql/deployment.yml
+  - ./postgresql/persistent-volume.yml
+  - ./postgresql/service.yml
+  - ./postgresql/volume-claim.yml
   - ./api/secret.yml
   - ./api/configmap.yml
   - ./api/service.yml

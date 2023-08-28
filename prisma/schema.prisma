@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Orders {
-  id String @id @map("_id")
+  id String @unique
   createdAt DateTime
   totalPrice Float
   restaurantId String
@@ -19,12 +19,12 @@ model Orders {
 }
 
 model Deliveries {
-  id String @id @map("_id")
+  id String @unique
   orderId String
   createdAt DateTime
 }
 
 model Users {
-  id String @id @map("_id")
+  id String @unique
   createdAt DateTime
 }

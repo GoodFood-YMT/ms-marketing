@@ -27,7 +27,18 @@ spec:
           image: yasinkara/ms-marketing:latest
           imagePullPolicy: Always
           name: ms-marketing
+          command: ['/bin/sh']
+          args: ['-c', 'npx prisma migrate deploy; dumb-init node server.js']
           ports:
             - containerPort: 3333
           resources: {}
+      initContainers:
+        - name: check-db-ready
+          image: postgres:9.6.5
+          command:
+            [
+              'sh',
+              '-c',
+              'until pg_isready -h ms-marketing-db -p 5432; do echo waiting for database; sleep 2; done;',
+            ]
       restartPolicy: Always
