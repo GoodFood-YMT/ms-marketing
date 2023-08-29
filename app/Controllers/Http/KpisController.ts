@@ -1,6 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { prisma } from '@ioc:Adonis/Addons/Prisma'
-import { getDates, removeDays } from 'start/rabbit'
+import { getDates, removeDays } from 'App/Utils'
 
 export default class KpisController {
   public async index({ request, response }: HttpContextContract) {
