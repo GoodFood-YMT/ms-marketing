@@ -14,7 +14,7 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: /marketing/
+            path: /marketing
             backend:
               service:
                 name: ms-marketing
