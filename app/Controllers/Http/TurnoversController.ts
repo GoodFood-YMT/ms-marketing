@@ -16,7 +16,7 @@ export default class TurnoversController {
       by: ['createdAt', 'restaurantId'],
       where: {
         createdAt: { in: dates },
-        ...(role !== 'manager' ? { restaurantId: idRestaurant } : {}),
+        ...(role === 'manager' ? { restaurantId: idRestaurant } : {}),
       },
       _sum: {
         totalPrice: true,

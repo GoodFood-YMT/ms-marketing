@@ -17,7 +17,7 @@ export default class KpisController {
     const orders = await prisma.orders.findMany({
       where: {
         createdAt: { in: dates },
-        ...(role !== 'manager' ? { restaurantId: { equals: idRestaurant } } : {}),
+        ...(role === 'manager' ? { restaurantId: { equals: idRestaurant } } : {}),
       },
       select: { id: true },
     })
@@ -25,7 +25,7 @@ export default class KpisController {
     const deliveries = await prisma.deliveries.count({
       where: {
         createdAt: { in: dates },
-        ...(role !== 'manager' ? { orderId: { in: orders.map((el) => el.id) } } : {}),
+        ...(role === 'manager' ? { orderId: { in: orders.map((el) => el.id) } } : {}),
       },
     })
 
@@ -38,7 +38,7 @@ export default class KpisController {
     const revenu = await prisma.orders.aggregate({
       where: {
         createdAt: { in: dates },
-        ...(role !== 'manager' ? { restaurantId: { equals: idRestaurant } } : {}),
+        ...(role === 'manager' ? { restaurantId: { equals: idRestaurant } } : {}),
       },
       _sum: {
         totalPrice: true,

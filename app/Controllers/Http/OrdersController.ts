@@ -17,7 +17,7 @@ export default class OrdersController {
       _count: { _all: true },
       where: {
         createdAt: { in: dates },
-        ...(role !== 'manager' ? { restaurantId: idRestaurant } : {}),
+        ...(role === 'manager' ? { restaurantId: idRestaurant } : {}),
       },
       orderBy: { createdAt: 'asc' },
       skip: (page - 1) * pageSize,
