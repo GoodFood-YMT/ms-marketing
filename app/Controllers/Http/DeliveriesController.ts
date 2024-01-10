@@ -13,7 +13,7 @@ export default class DeliveriesController {
     const pageSize = Number(request.input('pageSize') ?? 10)
 
     let restaurantCondition = {}
-    if (role !== 'manager') {
+    if (role === 'manager') {
       const orders = await prisma.orders.findMany({
         where: {
           restaurantId: { equals: idRestaurant },
